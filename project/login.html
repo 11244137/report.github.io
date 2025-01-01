@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - 3C Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="register.html">註冊</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="login-hero">
+            <h1>歡迎光臨!</h1>
+            <p>請選擇登入以進行購物</p>
+        </section>
+
+        <section class="login-card">
+            <div class="card">
+                <h2>登入</h2>
+                <form action="dashboard.html" method="POST" class="login-form">
+                    <div class="form-group">
+                        <label for="email">帳號:</label>
+                        <input type="email" id="email" name="email" placeholder="請輸入您的帳號" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密碼:</label>
+                        <input type="password" id="password" name="password" placeholder="請輸入您的密碼" required>
+                    </div>
+                    <button type="submit" class="btn">登入</button>
+                </form>
+                <p class="signup-link">還沒加入會員嗎? <a href="register.html">點此註冊</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 歡迎光臨3C Hub!</p>
+    </footer>
+</body>
+</html>

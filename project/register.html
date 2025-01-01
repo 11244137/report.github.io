@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - 3C Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="login.html">登入</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="login-hero">
+            <h1>加入我們!</h1>
+            <p>註冊成為會員，享受更多優惠與最新資訊</p>
+        </section>
+
+        <section class="login-card">
+            <div class="card">
+                <h2>註冊</h2>
+                <form action="welcome.html" method="POST" class="login-form">
+                    <div class="form-group">
+                        <label for="name">姓名:</label>
+                        <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">電子郵件:</label>
+                        <input type="email" id="email" name="email" placeholder="請輸入您的電子郵件" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密碼:</label>
+                        <input type="password" id="password" name="password" placeholder="請設定密碼" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">確認密碼:</label>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="再次輸入密碼" required>
+                    </div>
+                    <button type="submit" class="btn">註冊</button>
+                </form>
+                <p class="signup-link">已經有帳號了? <a href="login.html">點此登入</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 歡迎加入3C Hub!</p>
+    </footer>
+</body>
+</html>

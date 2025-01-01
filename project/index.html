@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3C Products E-commerce</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // 初始化購物車
+        function initializeCart() {
+            if (!localStorage.getItem("cart")) {
+                localStorage.setItem("cart", JSON.stringify([]));
+            }
+        }
+
+        // 加入購物車
+        function addToCart(productName, productPrice) {
+            const cart = JSON.parse(localStorage.getItem("cart")); // 取得購物車內容
+            cart.push({ name: productName, price: productPrice }); // 新增商品到購物車
+            localStorage.setItem("cart", JSON.stringify(cart)); // 更新購物車
+            alert(`"${productName}" 已成功加入購物車！`);
+        }
+
+        // 網頁載入時初始化購物車
+        document.addEventListener("DOMContentLoaded", initializeCart);
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="#products">產品</a></li>
+                <li><a href="#about">關於我們</a></li>
+                <li><a href="login.html">登入</a></li>
+                <li><a href="cart.html">購物車</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>歡迎光臨3C Hub!</h1>
+            <p>您將在這裡採購到最新的商品!</p>
+            <a href="#products" class="btn">開始購物!</a>
+        </section>
+
+        <section id="products" class="products-section">
+            <h2>我們的產品</h2>
+            <div class="product-grid">
+                <!-- 商品 1 -->
+                <div class="product">
+                    <img src="messageImage_1735574406288.jpg" alt="Product 1">
+                    <h3>iPhone 16 Pro Max (256GB)</h3>
+                    <p>$42,999</p>
+                    <button class="btn" onclick="addToCart('iPhone 16 Pro Max (256GB)', 42999)">加入購物車</button>
+                </div>
+                <!-- 商品 2 -->
+                <div class="product">
+                    <img src="messageImage_1735574452707.jpg" alt="Product 2">
+                    <h3>Apple Watch Series 10 GPS 46mm</h3>
+                    <p>$14,400</p>
+                    <button class="btn" onclick="addToCart('Apple Watch Series 10 GPS 46mm', 14400)">加入購物車</button>
+                </div>
+                <!-- 商品 3 -->
+                <div class="product">
+                    <img src="messageImage_1735574488233.jpg" alt="Product 3">
+                    <h3>Samsung S24 Ultra</h3>
+                    <p>$38,490</p>
+                    <button class="btn" onclick="addToCart('Samsung S24 Ultra', 38490)">加入購物車</button>
+                </div>
+                <!-- 商品 4 -->
+                <div class="product">
+                    <img src="messageImage_1735574593261.jpg" alt="Product 4">
+                    <h3>Switch OLED 白主機 台灣公司貨</h3>
+                    <p>$12,999</p>
+                    <button class="btn" onclick="addToCart('Switch OLED 白主機 台灣公司貨', 12999)">加入購物車</button>
+                </div>
+                <!-- 商品 5 -->
+                <div class="product">
+                    <img src="messageImage_1735574620354.jpg" alt="Product 5">
+                    <h3>AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)</h3>
+                    <p>$6,990</p>
+                    <button class="btn" onclick="addToCart('AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)', 6990)">加入購物車</button>
+                </div>
+                <!-- 商品 6 -->
+                <div class="product">
+                    <img src="messageImage_1735574896942.jpg" alt="Product 6">
+                    <h3>DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)</h3>
+                    <p>$3,990</p>
+                    <button class="btn" onclick="addToCart('DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)', 3990)">加入購物車</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>關於我們</h2>
+            <p>我們是 3C Hub，專注於提供最新、最全面的 3C 產品選擇。從智能手機、筆記型電腦，到穿戴設備與配件，我們致力於滿足客戶對於科技產品的多樣需求。我們的核心價值是高品質、誠信和卓越服務，無論您是想升級設備還是尋找最新科技趨勢，3C Hub 都是您的最佳選擇。歡迎光臨，讓我們一起探索科技的無限可能！</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 3C Hub 將提供最完善的服務給您~</p>
+    </footer>
+</body>
+</html>

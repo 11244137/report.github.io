@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車 - 3C Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // 顯示購物車內容
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartContainer = document.getElementById("cart-items");
+            const totalContainer = document.getElementById("cart-total");
+
+            cartContainer.innerHTML = ""; // 清空內容
+            let totalAmount = 0;
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = "<p>購物車目前是空的。</p>";
+                totalContainer.textContent = "總金額：$0";
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement("div");
+                cartItem.classList.add("cart-item");
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p class="cart-item-price">$${item.price.toLocaleString()}</p>
+                    </div>
+                    <button class="btn remove-btn" onclick="removeFromCart(${index})">移除</button>
+                `;
+                cartContainer.appendChild(cartItem);
+                totalAmount += item.price;
+            });
+
+            totalContainer.textContent = `總金額：$${totalAmount.toLocaleString()}`;
+        }
+
+        // 從購物車移除商品
+        function removeFromCart(index) {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayCart();
+        }
+
+        // 處理結帳流程
+        function handleCheckout() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            if (cart.length === 0) {
+                alert("您的購物車是空的，請先選擇商品！");
+                return;
+            }
+
+            // 顯示結帳成功訊息
+            alert("感謝您的購買！訂單已完成。");
+            // 清空購物車
+            localStorage.removeItem("cart");
+            // 跳轉到感謝頁面或更新畫面
+            window.location.href = "thankyou.html";
+        }
+
+        // 初始化購物車畫面
+        document.addEventListener("DOMContentLoaded", displayCart);
+    </script>
+    <style>
+        /* CSS - 基本樣式美化 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .cart-section {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-section h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            margin-left: 15px;
+        }
+
+        .cart-item-details h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .cart-item-price {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #888;
+        }
+
+        .remove-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .remove-btn:hover {
+            background-color: #d9363e;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .checkout {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .checkout .btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .checkout .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <div class="nav-links">
+                <a href="index.html">首頁</a>
+                <a href="login.html">登入</a>
+                <a href="cart.html">購物車</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cart-section">
+            <h1>購物車</h1>
+            <div id="cart-items" class="cart-items">
+                <!-- 購物車商品會動態載入到這裡 -->
+            </div>
+            <div id="cart-total" class="cart-total">
+                <!-- 總金額會動態載入到這裡 -->
+            </div>
+            <div class="checkout">
+                <button class="btn" onclick="handleCheckout()">結帳</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
