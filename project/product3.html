@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung S24 Ultra 詳細頁面</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // 註冊評論
+        function submitComment() {
+            const commentInput = document.getElementById("commentInput");
+            const commentList = document.getElementById("commentList");
+            const newComment = commentInput.value.trim();
+
+            if (newComment) {
+                const li = document.createElement("li");
+                li.textContent = newComment;
+                commentList.appendChild(li);
+                commentInput.value = "";
+            } else {
+                alert("請輸入評論內容！");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="product3.html">Samsung S24 Ultra</a></li>
+                <li><a href="cart.html">購物車</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-detail">
+            <h2>Samsung S24 Ultra</h2>
+            <img src="messageImage_1735574488233.jpg" alt="Samsung S24 Ultra">
+            <p><strong>價格：</strong>$38,490</p>
+            <p><strong>描述：</strong>Samsung Galaxy S24 Ultra，具備強大的處理器和超高解析度的攝像頭，為您帶來無與倫比的手機體驗。</p>
+            <label for="quantity">數量：</label>
+            <input type="number" id="quantity" min="1" value="1">
+            <button class="btn" onclick="addToCart('Samsung S24 Ultra', 38490, 'quantity')">加入購物車</button>
+        </section>
+
+        <section class="comments-section">
+            <h3>評論區</h3>
+            <textarea id="commentInput" placeholder="輸入您的評論..." rows="4" cols="50"></textarea><br>
+            <button class="btn" onclick="submitComment()">提交評論</button>
+            <ul id="commentList">
+                <!-- 註冊的評論會顯示在這裡 -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 3C Hub</p>
+    </footer>
+</body>
+</html>

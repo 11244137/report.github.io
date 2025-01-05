@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 16 Pro Max 詳細頁面</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="index.html">返回首頁</a>
+    <script>
+        // 註冊評論
+        function submitComment() {
+            const commentInput = document.getElementById("commentInput");
+            const commentList = document.getElementById("commentList");
+            const newComment = commentInput.value.trim();
+
+            if (newComment) {
+                const li = document.createElement("li");
+                li.textContent = newComment;
+                commentList.appendChild(li);
+                commentInput.value = "";
+            } else {
+                alert("請輸入評論內容！");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="product1.html">iPhone 16 Pro Max</a></li>
+                <li><a href="cart.html">購物車</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-detail">
+            <h2>iPhone 16 Pro Max (256GB)</h2>
+            <img src="messageImage_1735574406288.jpg" alt="iPhone 16 Pro Max">
+            <p><strong>價格：</strong>$42,999</p>
+            <p><strong>描述：</strong>最新款的 iPhone 16 Pro Max，搭載強大的處理器、優質的顯示屏和頂尖的攝影技術，提供無與倫比的使用體驗。</p>
+            <label for="quantity">數量：</label>
+            <input type="number" id="quantity" min="1" value="1">
+            <button class="btn" onclick="addToCart('iPhone 16 Pro Max (256GB)', 42999, 'quantity')">加入購物車</button>
+        </section>
+
+        <section class="comments-section">
+            <h3>評論區</h3>
+            <textarea id="commentInput" placeholder="輸入您的評論..." rows="4" cols="50"></textarea><br>
+            <button class="btn" onclick="submitComment()">提交評論</button>
+            <ul id="commentList">
+                <!-- 註冊的評論會顯示在這裡 -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 3C Hub</p>
+    </footer>
+</body>
+</html>

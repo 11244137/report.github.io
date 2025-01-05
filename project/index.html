@@ -1,102 +1,326 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3C Products E-commerce</title>
+    <title>3C 產品電子商務</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        // 初始化購物車
-        function initializeCart() {
-            if (!localStorage.getItem("cart")) {
-                localStorage.setItem("cart", JSON.stringify([]));
+    <style>
+        /* 跑馬燈廣告 */
+        .marquee {
+            background-color: #ffeb3b;
+            color: #333;
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee p {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+        }
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
             }
         }
 
-        // 加入購物車
-        function addToCart(productName, productPrice) {
-            const cart = JSON.parse(localStorage.getItem("cart")); // 取得購物車內容
-            cart.push({ name: productName, price: productPrice }); // 新增商品到購物車
-            localStorage.setItem("cart", JSON.stringify(cart)); // 更新購物車
-            alert(`"${productName}" 已成功加入購物車！`);
+        /* 廣告輪播 */
+        .carousel {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .carousel img {
+            width: 100%;
+            display: block;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+        }
+        .carousel-controls button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
-        // 網頁載入時初始化購物車
-        document.addEventListener("DOMContentLoaded", initializeCart);
+        /* 產品展示格 */
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .product {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 480px;
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .product h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .product p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .product label {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .product input {
+            padding: 5px;
+            font-size: 14px;
+            width: 50px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .product button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+        }
+
+        .product button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-inner img');
+            const totalSlides = slides.length;
+            if (index >= totalSlides) currentIndex = 0;
+            else if (index < 0) currentIndex = totalSlides - 1;
+            else currentIndex = index;
+            const offset = -currentIndex * 100;
+            document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        setInterval(nextSlide, 5000);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.prev').addEventListener('click', prevSlide);
+            document.querySelector('.next').addEventListener('click', nextSlide);
+        });
+
+        // 加入購物車功能
+        function addToCart(productName, price, quantityId) {
+            const quantity = document.getElementById(quantityId).value;
+            
+            // 建立商品物件
+            const product = {
+                name: productName,
+                price: price,
+                quantity: quantity
+            };
+            
+            // 檢查購物車是否存在，若無則創建空的購物車
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // 檢查該商品是否已經在購物車中
+            const productIndex = cart.findIndex(item => item.name === productName);
+            if (productIndex >= 0) {
+                // 如果商品已經在購物車中，更新數量
+                cart[productIndex].quantity = parseInt(cart[productIndex].quantity) + parseInt(quantity);
+            } else {
+                // 如果商品不在購物車中，將其加入購物車
+                cart.push(product);
+            }
+
+            // 保存更新後的購物車到 localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // 顯示提示訊息
+            alert(`${productName} 已加入購物車`);
+        }
     </script>
 </head>
 <body>
+    <!-- 跑馬燈廣告 -->
+    <div class="marquee">
+        <p>最新促銷：全館滿 10,000 免運費！限時折扣至 1/15 止！</p>
+    </div>
+
     <header>
         <nav class="navbar">
             <div class="logo">3C Hub</div>
             <ul class="nav-links">
                 <li><a href="index.html">首頁</a></li>
                 <li><a href="#products">產品</a></li>
-                <li><a href="#about">關於我們</a></li>
+                <li><a href="about.html">關於我們</a></li>
                 <li><a href="login.html">登入</a></li>
                 <li><a href="cart.html">購物車</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>歡迎光臨3C Hub!</h1>
-            <p>您將在這裡採購到最新的商品!</p>
-            <a href="#products" class="btn">開始購物!</a>
-        </section>
+    <!-- 廣告輪播區 -->
+    <div class="carousel">
+        <div class="carousel-inner">
+            <img src="messageImage_1735574406288.jpg" alt="iPhone 16 Pro Max">
+            <img src="messageImage_1735574452707.jpg" alt="Apple Watch Series 10">
+            <img src="messageImage_1735574488233.jpg" alt="Samsung S24 Ultra">
+            <img src="messageImage_1735574593261.jpg" alt="Switch OLED">
+            <img src="messageImage_1735574620354.jpg" alt="AirPods Pro 2nd Gen">
+            <img src="messageImage_1735574896942.jpg" alt="DeathStalker V2 Pro">
+        </div>
+        <div class="carousel-controls">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </div>
 
+    <main>
         <section id="products" class="products-section">
             <h2>我們的產品</h2>
             <div class="product-grid">
                 <!-- 商品 1 -->
                 <div class="product">
-                    <img src="messageImage_1735574406288.jpg" alt="Product 1">
+                    <a href="product1.html">
+                    <img src="messageImage_1735574406288.jpg" alt="iPhone 16 Pro Max">
+                    </a>
                     <h3>iPhone 16 Pro Max (256GB)</h3>
                     <p>$42,999</p>
-                    <button class="btn" onclick="addToCart('iPhone 16 Pro Max (256GB)', 42999)">加入購物車</button>
+                    <label for="quantity-1">數量：</label>
+                    <input type="number" id="quantity-1" min="1" value="1">
+                    <button onclick="addToCart('iPhone 16 Pro Max (256GB)', 42999, 'quantity-1')">加入購物車</button>
                 </div>
                 <!-- 商品 2 -->
                 <div class="product">
-                    <img src="messageImage_1735574452707.jpg" alt="Product 2">
+                    <a href="product2.html">
+                    <img src="messageImage_1735574452707.jpg" alt="Apple Watch Series 10">
+                    </a>
                     <h3>Apple Watch Series 10 GPS 46mm</h3>
                     <p>$14,400</p>
-                    <button class="btn" onclick="addToCart('Apple Watch Series 10 GPS 46mm', 14400)">加入購物車</button>
+                    <label for="quantity-2">數量：</label>
+                    <input type="number" id="quantity-2" min="1" value="1">
+                    <button onclick="addToCart('Apple Watch Series 10 GPS 46mm', 14400, 'quantity-2')">加入購物車</button>
                 </div>
                 <!-- 商品 3 -->
                 <div class="product">
-                    <img src="messageImage_1735574488233.jpg" alt="Product 3">
+                    <a href="product3.html">
+                    <img src="messageImage_1735574488233.jpg" alt="Samsung S24 Ultra">
+                    </a>
                     <h3>Samsung S24 Ultra</h3>
                     <p>$38,490</p>
-                    <button class="btn" onclick="addToCart('Samsung S24 Ultra', 38490)">加入購物車</button>
+                    <label for="quantity-3">數量：</label>
+                    <input type="number" id="quantity-3" min="1" value="1">
+                    <button onclick="addToCart('Samsung S24 Ultra', 38490, 'quantity-3')">加入購物車</button>
                 </div>
                 <!-- 商品 4 -->
                 <div class="product">
-                    <img src="messageImage_1735574593261.jpg" alt="Product 4">
+                    <a href="product4.html">
+                    <img src="messageImage_1735574593261.jpg" alt="Switch OLED">
+                    </a>
                     <h3>Switch OLED 白主機 台灣公司貨</h3>
                     <p>$12,999</p>
-                    <button class="btn" onclick="addToCart('Switch OLED 白主機 台灣公司貨', 12999)">加入購物車</button>
+                    <label for="quantity-4">數量：</label>
+                    <input type="number" id="quantity-4" min="1" value="1">
+                    <button onclick="addToCart('Switch OLED 白主機 台灣公司貨', 12999, 'quantity-4')">加入購物車</button>
                 </div>
                 <!-- 商品 5 -->
                 <div class="product">
-                    <img src="messageImage_1735574620354.jpg" alt="Product 5">
+                    <a href="product5.html">
+                    <img src="messageImage_1735574620354.jpg" alt="AirPods Pro 2nd Gen">
+                    </a>
                     <h3>AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)</h3>
                     <p>$6,990</p>
-                    <button class="btn" onclick="addToCart('AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)', 6990)">加入購物車</button>
+                    <label for="quantity-5">數量：</label>
+                    <input type="number" id="quantity-5" min="1" value="1">
+                    <button onclick="addToCart('AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)', 6990, 'quantity-5')">加入購物車</button>
                 </div>
                 <!-- 商品 6 -->
                 <div class="product">
-                    <img src="messageImage_1735574896942.jpg" alt="Product 6">
+                    <a href="product6.html">
+                    <img src="messageImage_1735574896942.jpg" alt="DeathStalker V2 Pro">
+                    </a> 
                     <h3>DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)</h3>
                     <p>$3,990</p>
-                    <button class="btn" onclick="addToCart('DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)', 3990)">加入購物車</button>
+                    <label for="quantity-6">數量：</label>
+                    <input type="number" id="quantity-6" min="1" value="1">
+                    <button onclick="addToCart('DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)', 3990, 'quantity-6')">加入購物車</button>
                 </div>
             </div>
-        </section>
-
-        <section id="about" class="about-section">
-            <h2>關於我們</h2>
-            <p>我們是 3C Hub，專注於提供最新、最全面的 3C 產品選擇。從智能手機、筆記型電腦，到穿戴設備與配件，我們致力於滿足客戶對於科技產品的多樣需求。我們的核心價值是高品質、誠信和卓越服務，無論您是想升級設備還是尋找最新科技趨勢，3C Hub 都是您的最佳選擇。歡迎光臨，讓我們一起探索科技的無限可能！</p>
         </section>
     </main>
 

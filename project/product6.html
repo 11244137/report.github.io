@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 16 Pro Max 詳細頁面</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="index.html">返回首頁</a>
+    <script>
+        // 註冊評論
+        function submitComment() {
+            const commentInput = document.getElementById("commentInput");
+            const commentList = document.getElementById("commentList");
+            const newComment = commentInput.value.trim();
+
+            if (newComment) {
+                const li = document.createElement("li");
+                li.textContent = newComment;
+                commentList.appendChild(li);
+                commentInput.value = "";
+            } else {
+                alert("請輸入評論內容！");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="product6.html">DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)</a></li>
+                <li><a href="cart.html">購物車</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-detail">
+            <a href="product6.html">
+                <img src="messageImage_1735574896942.jpg" alt="DeathStalker V2 Pro">
+                </a> 
+                <h3>DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)</h3>
+                <p><strong>價格：</strong>$3,990</p>
+                <p><strong>描述：</strong>DeathStalker V2 Pro 無線三模機械式矮軸鍵盤是專為追求高效能與極致打字體驗的玩家與專業人士設計的。這款鍵盤搭載先進的無線三模連接技術，支援藍牙、2.4GHz無線連接以及有線連接，無論是辦公室、家庭還是遊戲場景，都能提供穩定流暢的操作體驗。
+
+                    配備矮軸紅軸開關，提供輕柔而靈敏的按壓感受，讓每一次敲擊都能迅速回應，適合長時間使用不會疲勞。紅軸的無聲特性，能夠大幅減少噪音干擾，是喜愛安靜環境工作的最佳選擇。同時，矮軸設計讓鍵盤更加薄型，輕巧的外觀也使得攜帶更加方便，無論是在桌面上還是外出攜帶，都非常適合。
+                    
+                    此外，這款鍵盤擁有可編程的鍵位和RGB燈效，您可以根據自己的需求和喜好進行自定義設置，打造專屬的燈光效果，為您的桌面增添個性化風格。中文鍵位設計，更符合本地使用者的需求，提升打字效率。
+                    
+                    無論是工作還是遊戲，DeathStalker V2 Pro 無線三模機械式矮軸鍵盤都能提供穩定、靈敏與舒適的使用體驗，讓您在每一次敲擊中都能感受到非凡的性能與極致的操控快感！
+                    
+                    </p>
+                <label for="quantity-6">數量：</label>
+                <input type="number" id="quantity-6" min="1" value="1">
+                <button onclick="addToCart('DeathStalker V2 Pro 無線三模機械式矮軸鍵盤(紅軸/中文)', 3990, 'quantity-6')">加入購物車</button>
+        </section>
+
+        <section class="comments-section">
+            <h3>評論區</h3>
+            <textarea id="commentInput" placeholder="輸入您的評論..." rows="4" cols="50"></textarea><br>
+            <button class="btn" onclick="submitComment()">提交評論</button>
+            <ul id="commentList">
+                <!-- 註冊的評論會顯示在這裡 -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 3C Hub</p>
+    </footer>
+</body>
+</html>

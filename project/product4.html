@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 16 Pro Max 詳細頁面</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="index.html">返回首頁</a>
+    <script>
+        // 註冊評論
+        function submitComment() {
+            const commentInput = document.getElementById("commentInput");
+            const commentList = document.getElementById("commentList");
+            const newComment = commentInput.value.trim();
+
+            if (newComment) {
+                const li = document.createElement("li");
+                li.textContent = newComment;
+                commentList.appendChild(li);
+                commentInput.value = "";
+            } else {
+                alert("請輸入評論內容！");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="product4.html">Switch OLED 白主機 台灣公司貨</a></li>
+                <li><a href="cart.html">購物車</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-detail">
+            <a href="product4.html">
+                <img src="messageImage_1735574593261.jpg" alt="Switch OLED">
+                
+                </a>
+                <h3>Switch OLED 白主機 台灣公司貨</h3>
+                <p><strong>價格：</strong>$12,999</p>
+                <p><strong>描述：</strong>體驗全新的遊戲世界，Nintendo Switch OLED 白主機將帶來更豐富的視覺享受！搭載 7 吋 OLED 屏幕，顯示效果更加生動鮮明，無論是細節還是色彩都更加鮮活，讓您享受更具沉浸感的遊戲體驗。不僅如此，Switch OLED 具有更強的音效表現、加大擴充存儲空間的能力以及更穩定的支架設計，讓玩家無論是在家還是外出，都能夠輕鬆享受高品質的遊戲樂趣。
+
+                    這款 Switch OLED 白主機是台灣公司貨，保證原廠正品，並享有完整的售後服務。無論是單機遊玩還是與好友一起共享歡樂時光，Switch OLED 都能讓每一刻都變得更加精彩。趕快擁有這款專為遊戲愛好者打造的白色主機，開啟您的遊戲新世界！</p>
+                <label for="quantity-4">數量：</label>
+                <input type="number" id="quantity-4" min="1" value="1">
+                <button onclick="addToCart('Switch OLED 白主機 台灣公司貨', 12999, 'quantity-4')">加入購物車</button>
+        </section>
+
+        <section class="comments-section">
+            <h3>評論區</h3>
+            <textarea id="commentInput" placeholder="輸入您的評論..." rows="4" cols="50"></textarea><br>
+            <button class="btn" onclick="submitComment()">提交評論</button>
+            <ul id="commentList">
+                <!-- 註冊的評論會顯示在這裡 -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 3C Hub</p>
+    </footer>
+</body>
+</html>

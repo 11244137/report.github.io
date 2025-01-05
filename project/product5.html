@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 16 Pro Max 詳細頁面</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="index.html">返回首頁</a>
+    <script>
+        // 註冊評論
+        function submitComment() {
+            const commentInput = document.getElementById("commentInput");
+            const commentList = document.getElementById("commentList");
+            const newComment = commentInput.value.trim();
+
+            if (newComment) {
+                const li = document.createElement("li");
+                li.textContent = newComment;
+                commentList.appendChild(li);
+                commentInput.value = "";
+            } else {
+                alert("請輸入評論內容！");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">3C Hub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="product5.html">AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)</a></li>
+                <li><a href="cart.html">購物車</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-detail">
+            <a href="product5.html">
+                <img src="messageImage_1735574620354.jpg" alt="AirPods Pro 2nd Gen">
+                </a>
+                <h3>AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)</h3>
+                <p><strong>價格：</strong>$6,990</p>
+                <p><strong>描述：</strong>以卓越的音質與先進的科技，AirPods Pro (第 2 代) 讓您的聆聽體驗升級。全新升級的 H2 晶片，提供更清晰、更細膩的音效，不僅提升了音樂的深度與細節，也強化了通話音質，無論您在繁忙的街頭還是安靜的辦公室，噪音消除技術都能有效過濾背景噪音，讓您聽得更清楚。
+
+                    搭配 MagSafe 充電盒 (USBC)，使您的充電過程更加便捷與高效。無論是使用 MagSafe 無線充電還是傳統的有線 USB-C 充電，都能快速為耳機充電，享受長達 6 小時的播放時間，並可搭配充電盒提供更多的使用時長。
+                    
+                    無論是音樂愛好者還是常需通話的用戶，AirPods Pro (第 2 代) 都能提供無與倫比的音質與舒適度，適合長時間佩戴，輕鬆融入您日常生活的每一刻。立即擁有，體驗無縫連接與沉浸音效的全新境界！</p>
+                <label for="quantity-5">數量：</label>
+                <input type="number" id="quantity-5" min="1" value="1">
+                <button onclick="addToCart('AirPods Pro (第 2 代) 搭配 MagSafe 充電盒 (USBC)', 6990, 'quantity-5')">加入購物車</button>
+        </section>
+
+        <section class="comments-section">
+            <h3>評論區</h3>
+            <textarea id="commentInput" placeholder="輸入您的評論..." rows="4" cols="50"></textarea><br>
+            <button class="btn" onclick="submitComment()">提交評論</button>
+            <ul id="commentList">
+                <!-- 註冊的評論會顯示在這裡 -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 3C Hub</p>
+    </footer>
+</body>
+</html>
